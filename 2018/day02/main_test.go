@@ -45,3 +45,13 @@ func TestHasLetterThrice(t *testing.T) {
 		t.Error("Expected true, got", result)
 	}
 }
+
+func TestDifferByOneLetter(t *testing.T) {
+	if b, s := differByOneLetter("abcde", "axcye"); b != false || s != "ace" {
+		t.Error("two differences")
+	}
+
+	if b, s := differByOneLetter("fghij", "fguij"); b != true || s != "fgij" {
+		t.Error("one difference")
+	}
+}
