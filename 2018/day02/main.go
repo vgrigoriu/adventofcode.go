@@ -55,7 +55,13 @@ func part2() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(lines)
+	for i, id1 := range lines {
+		for _, id2 := range lines[i+1:] {
+			if ok, common := differByOneLetter(id1, id2); ok {
+				fmt.Println(common)
+			}
+		}
+	}
 }
 
 func hasLetterTwice(s string) bool {
