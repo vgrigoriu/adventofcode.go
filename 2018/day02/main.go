@@ -1,9 +1,36 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+)
 
 func main() {
-	fmt.Println("Ana are mere")
+	file, err := os.Open("input.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	by2, by3 := 0, 0
+	for scanner.Scan() {
+		line := scanner.Text()
+		if hasLetterTwice(line) {
+			by2++
+		}
+		if hasLetterThrice(line) {
+			by3++
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(by2 * by3)
 }
 
 func hasLetterTwice(s string) bool {
