@@ -34,7 +34,7 @@ func main() {
 }
 
 type claim struct {
-	left, top, w, h int
+	id, left, top, w, h int
 }
 
 func new(s string) claim {
@@ -44,7 +44,7 @@ func new(s string) claim {
 	if err != nil {
 		log.Fatalf("cannot parse a claim out of «%s»", s)
 	}
-	return claim{left, top, w, h}
+	return claim{id, left, top, w, h}
 }
 
 func (c claim) stake() {
@@ -56,5 +56,5 @@ func (c claim) stake() {
 }
 
 func (c claim) String() string {
-	return fmt.Sprintf("left: %d; top: %d; w: %d; w: %d", c.left, c.top, c.w, c.h)
+	return fmt.Sprintf("id: %d; left: %d; top: %d; w: %d; w: %d", c.id, c.left, c.top, c.w, c.h)
 }

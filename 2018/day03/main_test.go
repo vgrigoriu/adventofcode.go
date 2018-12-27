@@ -5,6 +5,9 @@ import "testing"
 func TestNewClaim(t *testing.T) {
 	input := "#123 @ 3,2: 5x4"
 	claim := new(input)
+	if claim.id != 123 {
+		t.Errorf("id is %d, expecting 123", claim.id)
+	}
 	if claim.left != 3 {
 		t.Errorf("left is %d, expecting 3", claim.left)
 	}
