@@ -32,6 +32,12 @@ func main() {
 	}
 
 	fmt.Println(conflicts)
+
+	for _, claim := range claims {
+		if !claim.hasOverlap() {
+			fmt.Println(claim.id)
+		}
+	}
 }
 
 type claim struct {
@@ -54,6 +60,18 @@ func (c claim) stake() {
 			fabric[i][j] = append(fabric[i][j], c.id)
 		}
 	}
+}
+
+func (c claim) hasOverlap() bool {
+	for i := c.left; i < c.left+c.w; i++ {
+		for j := c.top; j < c.top+c.h; j++ {
+			if len(fabric[i][j]) > 1 {
+				return true
+			}
+		}
+	}
+
+	return false
 }
 
 func (c claim) String() string {
