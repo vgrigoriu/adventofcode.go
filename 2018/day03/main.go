@@ -7,7 +7,8 @@ import (
 	"github.com/vgrigoriu/adventofcode.go/common"
 )
 
-var fabric [1000][1000]int
+// matrix of vectors of claim ids
+var fabric [1000][1000][]int
 
 func main() {
 	lines := common.Input()
@@ -24,7 +25,7 @@ func main() {
 	conflicts := 0
 	for i := 0; i < 1000; i++ {
 		for j := 0; j < 1000; j++ {
-			if fabric[i][j] > 1 {
+			if len(fabric[i][j]) > 1 {
 				conflicts++
 			}
 		}
@@ -50,7 +51,7 @@ func new(s string) claim {
 func (c claim) stake() {
 	for i := c.left; i < c.left+c.w; i++ {
 		for j := c.top; j < c.top+c.h; j++ {
-			fabric[i][j]++
+			fabric[i][j] = append(fabric[i][j], c.id)
 		}
 	}
 }
