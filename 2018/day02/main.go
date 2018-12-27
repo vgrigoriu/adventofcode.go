@@ -1,10 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
+
+	"github.com/vgrigoriu/adventofcode.go/common"
 )
 
 func main() {
@@ -13,16 +12,10 @@ func main() {
 }
 
 func part1() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
+	input := common.Input()
 
-	scanner := bufio.NewScanner(file)
 	by2, by3 := 0, 0
-	for scanner.Scan() {
-		line := scanner.Text()
+	for _, line := range input {
 		if hasLetterTwice(line) {
 			by2++
 		}
@@ -31,29 +24,11 @@ func part1() {
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-
 	fmt.Println(by2 * by3)
 }
 
 func part2() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	lines := []string{}
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	lines := common.Input()
 
 	for i, id1 := range lines {
 		for _, id2 := range lines[i+1:] {
