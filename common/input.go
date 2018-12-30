@@ -3,13 +3,25 @@ package common
 
 import (
 	"bufio"
+	"flag"
 	"log"
 	"os"
 )
 
 // Input returns the content of the input files as a slice of strings.
 func Input() []string {
-	file, err := os.Open("input.txt")
+	flag.Parse()
+
+	args := flag.Args()
+	if len(args) > 1 {
+		log.Fatalf("don't know what to do with more than 1 argument: %v", args)
+	}
+
+	input := "input.txt"
+	if len(args) == 1 {
+		input = args[0]
+	}
+	file, err := os.Open(input)
 	if err != nil {
 		log.Fatal(err)
 	}
