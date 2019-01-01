@@ -17,11 +17,14 @@ func main() {
 		guard := guardians[shift.id]
 		guardians[shift.id] = guard.mark(shift)
 	}
-	maxID := 0
+	maxID, maxMinute := 0, 0
 	var maxGuard guardianHistory
 	for id, guardian := range guardians {
-		if guardian.totalMinutes > maxGuard.totalMinutes {
+		min := guardian.minuteMostAsleep()
+		times := guardian.minutes[min]
+		if times > maxMinute {
 			maxGuard = guardian
+			maxMinute = times
 			maxID = id
 		}
 	}
