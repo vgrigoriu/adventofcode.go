@@ -39,3 +39,12 @@ func Input() []string {
 
 	return lines
 }
+
+// SingleLineInput returns the only line from the input file, or panics.
+func SingleLineInput() string {
+	input := Input()
+	if len(input) != 1 {
+		panic("expecting exactly one line of input")
+	}
+	return input[0]
+}
