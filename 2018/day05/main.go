@@ -7,12 +7,17 @@ import (
 
 func main() {
 	input := common.SingleLineInput()
+	result := fullyReact(input)
+	fmt.Println(len(result))
+}
+
+func fullyReact(input string) string {
 	result, more := react(input)
 	for more {
 		result, more = react(result)
 	}
 
-	fmt.Println(len(result))
+	return result
 }
 
 func react(input string) (result string, more bool) {
